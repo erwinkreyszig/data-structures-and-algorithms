@@ -71,17 +71,6 @@ class LinkedList(object):
         self.tail = previous_node
         self.tail.next = None
 
-    def insert_at(self, index, value):
-        if index == 0:
-            self.add_first(value)
-            return
-        new_node = Node(value)
-        current_node = self.head.next
-        counter = 1
-        while (True):
-            if index == counter:
-                new_node.next = current_node
-
     def index_of(self, value):
         """find the index of the node that has the specified value
         iterate over the list keeping track of the nth node we are
@@ -96,6 +85,7 @@ class LinkedList(object):
             if node.next is None:
                 break
             node = node.next
+            counter += 1
         return -1
 
     def contains(self, value):
@@ -104,10 +94,44 @@ class LinkedList(object):
         """
         return self.index_of(value) != -1
 
+    @property
+    def contents(self):
+        elements = []
+        current_node = self.head
+        while (True):
+            elements.append(current_node.value)
+            if current_node.next is None:
+                break
+            current_node = current_node.next
+        return elements
+
     # TODO:
     # implement insert_at(self, index, value)
     # implement delete_at(self, index)
 
 
-id __name__ == '__main__':
-    list = LinkedList()
+if __name__ == '__main__':
+    list = LinkedList(10)
+    # test adding to last
+    list.add_last(20)
+    list.add_last(30)
+    list.add_last(40)
+    assert list.contents == [10, 20, 30, 40]
+    # test adding to first
+    list.add_first(9)
+    list.add_first(8)
+    list.add_first(7)
+    assert list.contents == [7, 8, 9, 10, 20, 30, 40]
+    # test element existence
+    assert list.index_of(9) == 2
+    assert list.index_of(50) == -1
+    assert list.contains(8)
+    assert not list.contains(60)
+    # test deleting from first
+    list.delete_first()
+    list.delete_first()
+    assert list.contents == [9, 10, 20, 30, 40]
+    # test deleting from last
+    list.delete_last()
+    list.delete_last()
+    assert list.contents == [9, 10, 20]
