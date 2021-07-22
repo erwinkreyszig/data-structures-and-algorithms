@@ -2,6 +2,7 @@
 """Given an array arr[] of size N and an integer K. Find the
 maximum for each and every contiguous subarray of size K.
 
+
 Input:
 N = 9, K = 3
 arr[] = 1 2 3 1 4 5 2 3 6
