@@ -22,3 +22,19 @@ class BinaryTree(object):
             raise ValueError('A binary tree requires a noot ')
         self.root = root
         self.height = 0
+
+    def __get_empty_branch(self, node):
+        """checks whether node has branches
+        returns -1 if left node is empty, this meane this node has
+        no children because adding nodes go from left to right
+        returns 1 if the right node is empty, this means there is a
+        left child but no right child
+        returns 0 if the node has both a left and right child
+        """
+        if node.left is None:
+            return -1
+        if node.right is None:
+            return 1
+        return 0
+
+    def
