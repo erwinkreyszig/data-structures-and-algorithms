@@ -42,10 +42,15 @@ class Stack(object):
         """
         if self.__is_empty():
             raise OperationError('Stack is already empty.')
-        value = self.__contents[len(self.__contents) - 1]
-        del self.__contents[len(self.__contents) - 1]
+        value = self.__contents[-1]
+        del self.__contents[-1]
         self.pointer -= 1
         return value
+
+    def peek(self):
+        """returns the value at the top of the stack without popping it
+        """
+        return self.__contents[-1]
 
     @property
     def capacity(self):
@@ -100,15 +105,19 @@ if __name__ == '__main__':
     stack.push(20)
     stack.push(30)
     assert stack.contents == [10, 20, 30]
+    assert stack.peek() == 30
     # testing pop
     assert stack.pop() == 30
+    assert stack.peek() == 20
     assert stack.pop() == 20
+    assert stack.peek() == 10
     assert stack.contents == [10]
     # testing stack capacity
     stack.push(40)
     stack.push(50)
     stack.push(60)
     stack.push(70)
+    assert stack.peek() == 70
     ex = None
     try:
         stack.push(80)
