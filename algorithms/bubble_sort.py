@@ -12,7 +12,7 @@ def bubble_sort(input_list, order='asc'):
     order = order.lower()
     for i in range(n - 1):
         has_swapped = False
-        for j in range(n - 1):
+        for j in range(n - 1 - i):
             if (order == 'asc' and _temp[j] > _temp[j + 1]) or \
                 (order == 'desc' and _temp[j] < _temp[j + 1]):
                 has_swapped = True
